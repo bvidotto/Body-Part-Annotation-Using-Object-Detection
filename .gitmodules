@@ -1,3 +1,6 @@
 [submodule "src/annotationTransformations/coco-viewer"]
 	path = src/annotationTransformations/coco-viewer
 	url = https://github.com/trsvchn/coco-viewer
+[submodule "src/annotationTransformations/rdp"]
+	path = src/annotationTransformations/rdp
+	url = https://github.com/fhirschmann/rdp
