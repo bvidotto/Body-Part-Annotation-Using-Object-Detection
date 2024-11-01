@@ -1,0 +1,3 @@
+[submodule "src/annotationTransformations/coco-viewer"]
+	path = src/annotationTransformations/coco-viewer
+	url = https://github.com/trsvchn/coco-viewer
