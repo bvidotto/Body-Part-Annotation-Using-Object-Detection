@@ -1,7 +1,7 @@
-<script
+<!-- <script
   src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
   type="text/javascript">
-</script>
+</script> -->
 
 # Creation of an Automatic Annotation Pipeline using AI
 
@@ -9,19 +9,18 @@ Diploma Thesis / Final year project
 
 **Author**: Benoît Vidotto
 
-**ISIA Lab ,Polytech Mons (FPMs), UMONS, Belgium**
+**ISIA Lab, Polytech Mons (FPMs), UMONS, Belgium**
 
 This project aims to develop an automatic annotation pipeline to create a database of annotated images, specifically for human body parts. Conducted by Benoît Vidotto, this work is part of a final project at the University of Mons.
 
 
-<figure align="center">
+<p align="center">
     <img src="./images/image52.webp" alt="bar" width="100%">
-</figure>
+</p>
 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Content](#content)
 - [Databases](#databases)
   - [Pascal Database](#pascal-database)
 - [Object Detection Metrics](#object-detection-metrics)
@@ -32,31 +31,32 @@ This project aims to develop an automatic annotation pipeline to create a databa
 - [Automatic Annotation and Detection Pipeline](#automatic-annotation-and-detection-pipeline)
 - [Data Scraping](#data-scraping)
 - [Results and Conclusions](#results-and-conclusions)
-- [Improvement Perspectives](#improvement-perspectives)
-- [Questions?](#questions)
+- [Improvement Perspectives](#perspectives-for-improvement)
 - [References](#references)
 
 This document starts by the creation of the database, then the training of a object detection system and finally by the validation of the training.
-<figure align="center">
+<p align="center">
     <img src="./images/image30.webp" alt="bar" width="15%">
-</figure>
+</p>
 
 ## Introduction
 
 The main objective is to implement a method for automatically annotating images representing body parts. This process relies on the use of object detection algorithms and advanced annotation systems.
-<figure align="center" width="100%">
+<p align="center" width="100%">
     <img src="./images/image23.webp" alt="bar" width="24%">
     <img src="./images/image25.webp" alt="bar" width="24%">
     <img src="./images/image27.webp" alt="bar" width="24%">
     <img src="./images/image29.webp" alt="bar" width="20%">
-</figure>
-<figure align="center">
+</p>
+<p align="center">
     <img src="./images/image24.webp" alt="bar" width="24%">
     <img src="./images/image26.webp" alt="bar" width="24%">
     <img src="./images/image28.webp" alt="bar" width="24%">
     <img src="./images/image22.webp" alt="bar" width="20%">
-    <figcaption>Examples of human body parts segmentation [1]</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Examples of human body parts segmentation [1]</em>
+</p>
 
 
 ## Databases
@@ -71,45 +71,55 @@ To train a human body part detection algorithm, it is necessary to have:
 The database used comes from the PASCAL VOC project, which aimed to improve computer vision databases between 2005 and 2012. This database has been modified to annotate subcategories and contains:
 - 20 categories and 192 subcategories, with 24 subcategories for humans.
 - 10,103 images, of which 3,590 contain humans.
-<figure align="center">
+<p align="center">
     <img src="./images/image32.webp" alt="bar" width="25%">
     <img src="./images/image33.webp" alt="bar" width="25%">
     <img src="./images/image34.webp" alt="bar" width="25%">
-    <figcaption>Sample of the PASCAL VOC project [1]</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Sample of the PASCAL VOC project [1]</em>
+</p>
 
 ## Object Detection Metrics
 
 The performance of detection systems is evaluated using several metrics, including:
 - **Intersection over Union (IoU)**: Defines the binary state of a detection (correct or incorrect) based on a threshold, it measures the accuracy of a detection.
+  
   $$  IoU = \frac{\text{Area of Overlap}}{\text{Area of Union}}  $$
+  
 - **Confusion Matrix**: Compiles binary classification results, defining precision and recall.
 
 $$  \text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + FN}  $$
 
-<figure align="center">
+<p align="center">
     <img src="./images/image35.webp" alt="bar" width="25%">
     <img src="./images/image37.webp" alt="bar" width="37%">
-    <figcaption>On the left, the confusion matrix (in french). On the right, the intersection over union [3]</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>On the left, the confusion matrix (in french). On the right, the intersection over union [3]</em>
+</p>
 
 - **Average Precision (AP)** and **mean Average Precision (mAP)** are defined by the integral of the Precision-Recall curve, requiring an IoU threshold (set at 0.5 unless specified otherwise). A larger integral indicates high precision and recall values, suggesting good performance. AP is used per category, while mAP averages the AP across all categories. Higher mAP values indicate better system performance.
 
 
 
-<figure align="center">
+<p align="center">
     <img src="./images/image40.webp" alt="bar" width="50%">
-    <figcaption>AP and mAP</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>AP and mAP</em>
+</p>
 
 ## Object Detection Systems
 
-### YOLO [2]
+### YOLO
+[2]
 
 - A one-stage object detector using a convolutional neural network (CNN).
 - Reported performance: mAP of 42.1% with a required power of 77.96 GFLOPS.
 
-### NanoDet [3]
+### NanoDet
+[3]
 
 - A lightweight object detector, also based on a CNN, designed for real-time applications on mobile.
 - Reported performance: mAP of 30.4% with a required power of 1.79 GFLOPS.
@@ -117,31 +127,39 @@ $$  \text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + F
 ### MediaPipe
 
 - A tool for pose estimation that generates a skeleton per image containing humans.
-<figure align="center">
+<p align="center">
     <img src="./images/image43.webp" alt="bar" width="60%">
-    <figcaption>Segmentation used by MediaPipe [5]</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Segmentation used by MediaPipe [5]</em>
+</p>
 - The numerical association of skeleton joints allows for the segmentation of human body parts using the smallest bounding rectangle enclosing key points.
-<figure align="center">
+<p align="center">
     <img src="./images/image41.webp" alt="bar" width="25%">
     <img src="./images/image42.webp" alt="bar" width="40%">
-    <figcaption>Examples using MediaPipe [5]</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Examples using MediaPipe [5]</em>
+</p>
 - MediaPipe can detect only one skeleton per image. YOLO is employed to detect humans, and MediaPipe is applied to each detected individual.
-<figure align="center">
+<p align="center">
     <img src="./images/image44.webp" alt="bar" width="50%">
     <img src="./images/image45.webp" alt="bar" width="25%">
-    <figcaption>Detection of multiple people [6](left) and body part segmentation using MediaPipe (right)</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Detection of multiple people [6](left) and body part segmentation using MediaPipe (right)</em>
+</p>
 
 
 ### Detection System Comparison
 - mAP results show: MediaPipe (9.11%) < NanoDet (30.4%) < YOLO (45.1%).
 - While MediaPipe effectively detects people (via YOLO), it struggles with foot detection.
-<figure align="center">
+<p align="center">
     <img src="./images/image55.webp" alt="bar" width="100%">
-    <figcaption>Detection System Comparison</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Detection System Comparison</em>
+</p>
 
 ## Automatic Annotation and Detection Pipeline
 
@@ -150,10 +168,12 @@ The pipeline consists of several steps:
 - Automatic annotation of images using MediaPipe.
 - Training loop for a body part detection model, allowing for simulated training on a larger database.
 
-<figure align="center">
+<p align="center">
     <img src="./images/image46.webp" alt="bar" width="100%">
-    <figcaption>Automatic Annotation and Detection Pipeline</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Automatic Annotation and Detection Pipeline</em>
+</p>
 
 ## Data Scraping
 
@@ -167,20 +187,24 @@ Data scraping is a method of collecting data from the internet, enabling rapid r
   - Foot categories are poorly represented, complicating their detection.
   - The category of people is most prevalent, indicating easier detection.
 
-<figure align="center">
+<p align="center">
     <img src="./images/image51.webp" alt="bar" width="100%">
-    <figcaption>Average area and quantity of body part per image</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Average area and quantity of body part per image</em>
+</p>
 
 ## Hypothesis
 - Training database is sitcom-based.
 - Automatic annotation is performed with MediaPipe.
 - YOLO was trained for 200 epochs at each iteration.
 - Validation uses the Pascal database to ensure fidelity.
-<figure align="center">
+<p align="center">
     <img src="./images/image52.webp" alt="bar" width="100%">
-    <figcaption>Automatic Annotation and Detection Pipeline</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Automatic Annotation and Detection Pipeline</em>
+</p>
 
 ## Results and Conclusions
 
@@ -190,10 +214,12 @@ The results indicate that:
 - People, torsos, and heads were the most detected, while feet were not detected at all.
 - Confusion between left and right limbs was also observed, leading to numerous false negatives, **indicating an overfitting issue**.
 
-<figure align="center">
+<p align="center">
     <img src="./images/image53.webp" alt="bar" width="100%">
-    <figcaption>Results of using the pipeline on the sitcom database</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Results of using the pipeline on the sitcom database</em>
+</p>
 
 **Alternative Database:**
 - A new data scraping method created a human activity database from YouTube (MPII):
@@ -206,10 +232,12 @@ The results indicate that:
 - Validation mAP on Pascal: 17%.
 - Improved detection of people with fewer false positives; detection distribution is more homogeneous but still includes many false negatives.
 
-<figure align="center">
+<p align="center">
     <img src="./images/image54.webp" alt="bar" width="100%">
-    <figcaption>Results of using the pipeline on the MPII database</figcaption>
-</figure>
+        </p>
+<p align="center">
+    <em>Results of using the pipeline on the MPII database</em>
+</p>
 
 ## Conclusion
 - Comparison of object detection systems shows YOLO as the most effective on the Pascal database, with an mAP of 60.6%.
@@ -237,7 +265,7 @@ The results indicate that:
 
 ## Authors & contributors
 
-The original setup of this repository is by [Benoît Vidotto][bvidotto].
+The original setup of this repository is by [Benoît Vidotto](https://github.com/bvidotto).
 
 ## License
 
